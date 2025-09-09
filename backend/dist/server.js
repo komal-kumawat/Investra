@@ -53,9 +53,19 @@ app.get("/allPositions", AuthMiddleware_1.AuthMiddleware, (req, res) => __awaite
         res.status(500).json({ error: "Failed to fetch positions" });
     }
 }));
+app.get("/allOrders", AuthMiddleware_1.AuthMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const allOrders = yield OrdersSchema_1.default.find({});
+        res.json(allOrders);
+    }
+    catch (err) {
+        console.error("Error fetching orders:", err);
+        res.status(500).json({ error: "Failed to fetch orders" });
+    }
+}));
 app.post("/newOrder", AuthMiddleware_1.AuthMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const [name, quantity, price, mode] = req.body;
+        const { name, quantity, price, mode } = req.body;
         const newOrder = new OrdersSchema_1.default({
             name, quantity, price, mode
         });
@@ -65,7 +75,7 @@ app.post("/newOrder", AuthMiddleware_1.AuthMiddleware, (req, res) => __awaiter(v
     }
     catch (err) {
         console.error("Error receiving order:", err);
-        res.status(500).json({ error: "Failed to receive order" });
+        res.status(500).json({ error: "Failed to receive order", err });
     }
 }));
 app.listen(port, () => {

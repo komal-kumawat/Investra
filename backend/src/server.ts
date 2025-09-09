@@ -44,10 +44,20 @@ app.get("/allPositions", AuthMiddleware, async (req: AuthRequest, res: Response)
         res.status(500).json({ error: "Failed to fetch positions" });
     }
 })
+app.get("/allOrders", AuthMiddleware, async (req: AuthRequest, res: Response) => {
+    try {
+        const allOrders = await OrdersModel.find({});
+        res.json(allOrders);
+    } catch (err) {
+        console.error("Error fetching orders:", err);
+        res.status(500).json({ error: "Failed to fetch orders" });
+    }
+})
+
 
 app.post("/newOrder", AuthMiddleware, async (req: AuthRequest, res: Response) => {
     try {
-        const [name, quantity, price, mode] = req.body;
+        const {name, quantity, price, mode} = req.body;
         const newOrder = new OrdersModel({
             name, quantity, price, mode
         });
@@ -57,7 +67,7 @@ app.post("/newOrder", AuthMiddleware, async (req: AuthRequest, res: Response) =>
 
     } catch (err) {
         console.error("Error receiving order:", err);
-        res.status(500).json({ error: "Failed to receive order" });
+        res.status(500).json({ error: "Failed to receive order" ,err});
     }
 
 })
