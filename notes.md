@@ -30,8 +30,9 @@
 ```
 10. Also create their models
 11. make a forlder named Controllers :
-- write login regestration code 
+- write login regestration code in user_controller.ts
+- AuthMiddleware in middleware.ts
 
 12. In server.ts :
-- AuthMiddleware
+
 - write get route for : allHoldings , allPositions  ans post route for newOrder but authorise them using AuthMiddleware 

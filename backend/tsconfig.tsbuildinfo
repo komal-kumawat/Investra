@@ -1,0 +1,1 @@
+{"root":["./src/server.ts","./src/controllers/authmiddleware.ts","./src/controllers/user_controller.ts","./src/schema/holdingschema.ts","./src/schema/ordersschema.ts","./src/schema/positionsschema.ts","./src/schema/usersschema.ts"],"version":"5.9.2"}
